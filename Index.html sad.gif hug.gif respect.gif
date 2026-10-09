@@ -9,9 +9,9 @@
     body { background: linear-gradient(135deg, #ffe6eb 0%, #def3f8 100%); display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow: hidden; }
     .container { background: white; padding: 25px 20px; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); width: 90%; max-width: 390px; text-align: center; position: relative; }
     
-    .gif-img { width: 160px; height: 160px; object-fit: cover; border-radius: 20px; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+    .emoji-box { font-size: 80px; margin-bottom: 10px; display: inline-block; animation: float 2s infinite ease-in-out; }
     
-    h2 { color: #4a4a4a; margin-bottom: 10px; font-size: 1.25rem; line-height: 1.5; font-weight: 600; min-height: 60px; display: flex; align-items: center; justify-content: center; }
+    h2 { color: #4a4a4a; margin-bottom: 10px; font-size: 1.2rem; line-height: 1.5; font-weight: 600; min-height: 60px; display: flex; align-items: center; justify-content: center; }
     p.subtext { color: #777; font-size: 0.95rem; margin-bottom: 20px; line-height: 1.5; }
 
     .btn-group { display: flex; flex-direction: column; gap: 12px; justify-content: center; align-items: center; position: relative; min-height: 120px; }
@@ -28,6 +28,7 @@
     .result-desc { color: #57606f; font-size: 0.92rem; line-height: 1.6; margin-bottom: 20px; }
     .btn-thanks { background-color: #70a1ff; color: white; box-shadow: 0 4px 15px rgba(112, 161, 255, 0.35); }
 
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
     @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
   </style>
 </head>
@@ -35,7 +36,7 @@
 
   <!-- หน้าขอโอกาส -->
   <div class="container" id="mainStep">
-    <img src="https://media1.tenor.com/m/X9R1m0l80_gAAAAC/mochi-mochi-peach-cat-sad.gif" alt="Sad Cat" class="gif-img">
+    <div class="emoji-box" id="mainEmoji">🥺💔</div>
     <h2 id="mainHeading">เรามาเริ่มต้นใหม่กันได้มั้ย<br>เค้าจะทำให้ดีกว่าเดิม</h2>
     <p class="subtext" id="subHeading">ขอโอกาสแก้ตัวอีกสักครั้งนะ...</p>
 
@@ -47,7 +48,7 @@
 
   <!-- หน้าสรุปเมื่อกด "ได้" -->
   <div class="container result-card" id="yesStep">
-    <img src="https://media1.tenor.com/m/p_S_388Xk3sAAAAC/peach-and-goma-hug.gif" alt="Happy Hug" class="gif-img">
+    <div class="emoji-box">🥰💖✨</div>
     <div class="result-title">ขอบคุณนะสำหรับโอกาส 🙏💖</div>
     <div class="result-desc">
       เค้าสัญญาว่าจะดูแลความสัมพันธ์ครั้งนี้ให้ดีกว่าเดิม จะใส่ใจและตั้งใจให้มากขึ้นจริงๆ นะครับ ❤️
@@ -56,7 +57,7 @@
 
   <!-- หน้าสรุปเมื่อกด "เคารพการเลือกของอ้วน" -->
   <div class="container result-card" id="respectStep">
-    <img src="https://media1.tenor.com/m/o_w5o-J5hR8AAAAC/peach-goma-peach-and-goma.gif" alt="Respect" class="gif-img">
+    <div class="emoji-box">🌸🤍✨</div>
     <div class="result-title">เข้าใจแล้วครับอ้วน 🤍</div>
     <div class="result-desc">
       ไม่เป็นไรเลยนะ เคารพการตัดสินใจของอ้วนเสมอ ขอบคุณสำหรับทุกช่วงเวลาดีๆ ที่ผ่านมา ขอให้อ้วนมีความสุขมากๆ น้า
@@ -69,6 +70,7 @@
     const noBtn = document.getElementById('noBtn');
     const mainHeading = document.getElementById('mainHeading');
     const subHeading = document.getElementById('subHeading');
+    const mainEmoji = document.getElementById('mainEmoji');
 
     function handleNoButton() {
       noCount++;
@@ -76,14 +78,17 @@
       if (noCount === 1) {
         mainHeading.innerText = 'กลับมาดีกันนะจะไม่ทำแบบนั้นแล้ว';
         subHeading.innerText = 'เค้าสัญญาจริงๆ นะ...';
+        mainEmoji.innerText = '😭🙏🏻';
         moveButton();
       } else if (noCount === 2) {
         mainHeading.innerText = 'เค้าขอโทษนะตอนนั้นเค้ายังเด็กอยู่อ่ะคับ';
         subHeading.innerText = 'ตอนนี้เค้าโตขึ้นและรู้ตัวแล้วนะ...';
+        mainEmoji.innerText = '🥺💬';
         moveButton();
       } else if (noCount === 3) {
         mainHeading.innerText = 'เค้าขอโทษนะทุกเรื่องที่ผ่านมาเรามาเริ่มใหม่กันนะ';
         subHeading.innerText = 'ลบเรื่องไม่ดีแล้วเริ่มใหม่ด้วยกันนะ...';
+        mainEmoji.innerText = '🧸❤️';
         moveButton();
       } else if (noCount === 4 || noCount === 5) {
         moveButton();
