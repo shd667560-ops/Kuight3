@@ -14,9 +14,9 @@
     h2 { color: #4a4a4a; margin-bottom: 10px; font-size: 1.25rem; line-height: 1.5; font-weight: 600; }
     p.subtext { color: #777; font-size: 0.95rem; margin-bottom: 20px; line-height: 1.5; }
 
-    .btn-group { display: flex; flex-direction: column; gap: 12px; justify-content: center; align-items: center; position: relative; min-height: 110px; }
+    .btn-group { display: flex; flex-direction: column; gap: 12px; justify-content: center; align-items: center; position: relative; min-height: 120px; }
     
-    .btn { padding: 12px 24px; border-radius: 20px; font-size: 0.95rem; font-weight: bold; border: none; cursor: pointer; transition: all 0.2s ease; width: 100%; max-width: 280px; }
+    .btn { padding: 12px 20px; border-radius: 20px; font-size: 0.95rem; font-weight: bold; border: none; cursor: pointer; transition: all 0.2s ease; width: 100%; max-width: 280px; }
     .btn-yes { background-color: #ff6b81; color: white; box-shadow: 0 4px 15px rgba(255, 107, 129, 0.35); }
     .btn-yes:hover { background-color: #ff4757; transform: translateY(-2px); }
     
@@ -54,14 +54,14 @@
     </div>
   </div>
 
-  <!-- หน้าสรุปเมื่อกด "ไม่เป็นไร เราเคารพสิ่งที่เธอเลือกนะ" -->
+  <!-- หน้าสรุปเมื่อกด "เคารพการเลือกของอ้วน" -->
   <div class="container result-card" id="respectStep">
     <img src="https://media1.tenor.com/m/o_w5o-J5hR8AAAAC/peach-goma-peach-and-goma.gif" alt="Respect" class="gif-img">
-    <div class="result-title">เข้าใจแล้วครับ 🤍</div>
+    <div class="result-title">เข้าใจแล้วครับอ้วน 🤍</div>
     <div class="result-desc">
-      ไม่เป็นไรเลยนะ เคารพการตัดสินใจของเธอเสมอ ขอบคุณสำหรับทุกช่วงเวลาดีๆ ที่ผ่านมา ขอให้เธอเจอแต่ความสุขนะครับ
+      ไม่เป็นไรเลยนะ เคารพการตัดสินใจของอ้วนเสมอ ขอบคุณสำหรับทุกช่วงเวลาดีๆ ที่ผ่านมา ขอให้อ้วนมีความสุขมากๆ น้า
     </div>
-    <button class="btn btn-thanks" onclick="alert('ขอบคุณเธอมากๆ เช่นกันนะ 😊✨')">ขอบคุณนะ</button>
+    <button class="btn btn-thanks" onclick="alert('ขอบคุณอ้วนมากๆ เช่นกันนะ 😊✨')">ขอบคุณนะ</button>
   </div>
 
   <script>
@@ -71,29 +71,41 @@
     function handleNoButton() {
       noCount++;
 
-      if (noCount <= 5) {
-        // วิ่งหนี 5 รอบแรก
-        const x = Math.random() * (window.innerWidth - 200) - (window.innerWidth / 2 - 100);
-        const y = Math.random() * (window.innerHeight - 200) - (window.innerHeight / 2 - 100);
-        
-        noBtn.style.position = 'fixed';
-        noBtn.style.left = '50%';
-        noBtn.style.top = '50%';
-        noBtn.style.transform = `translate(${x}px, ${y}px)`;
+      if (noCount === 1) {
+        noBtn.innerText = 'กลับมาดีกันนะจะไม่ทำแบบนั้นแล้ว';
+        moveButton();
+      } else if (noCount === 2) {
+        noBtn.innerText = 'เค้าขอโทษนะตอนนั้นเค้ายังเด็กอยู่อ่ะคับ';
+        moveButton();
+      } else if (noCount === 3) {
+        noBtn.innerText = 'เค้าขอโทษนะทุกเรื่องที่ผ่านมาเรามาเริ่มใหม่กันนะ';
+        moveButton();
+      } else if (noCount === 4 || noCount === 5) {
+        moveButton();
       } else if (noCount === 6) {
-        // รอบที่ 6 ปุ่มหยุดวิ่ง และเปลี่ยนเป็นข้อความเคารพการตัดสินใจ
+        // รอบที่ 6 หยุดวิ่ง และเปลี่ยนเป็นข้อความเคารพการตัดสินใจ
         noBtn.style.position = 'relative';
         noBtn.style.left = '0';
         noBtn.style.top = '0';
         noBtn.style.transform = 'none';
         noBtn.style.backgroundColor = '#eccc68';
         noBtn.style.color = '#fff';
-        noBtn.innerText = 'ไม่เป็นไร เราเคารพสิ่งที่เธอเลือกนะ';
+        noBtn.innerText = 'ไม่เป็นไร เค้าเคารพการเลือกของอ้วนนะ';
       } else {
-        // รอบที่ 7 ขึ้นไป (เมื่อกดปุ่มที่เปลี่ยนข้อความแล้ว)
+        // รอบที่ 7 (เมื่อกดปุ่มข้อความรอบที่ 6)
         document.getElementById('mainStep').style.display = 'none';
         document.getElementById('respectStep').style.display = 'block';
       }
+    }
+
+    function moveButton() {
+      const x = Math.random() * (window.innerWidth - 220) - (window.innerWidth / 2 - 110);
+      const y = Math.random() * (window.innerHeight - 200) - (window.innerHeight / 2 - 100);
+      
+      noBtn.style.position = 'fixed';
+      noBtn.style.left = '50%';
+      noBtn.style.top = '50%';
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
     }
 
     function acceptLove() {
