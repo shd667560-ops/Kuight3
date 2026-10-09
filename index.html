@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ขอโอกาสอีกครั้งนะ...</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Kanit', sans-serif, system-ui; }
+    body { background: linear-gradient(135deg, #ffe6eb 0%, #def3f8 100%); display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow: hidden; }
+    .container { background: white; padding: 25px 20px; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); width: 90%; max-width: 390px; text-align: center; position: relative; }
+    
+    .gif-img { width: 150px; height: 150px; object-fit: cover; border-radius: 20px; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+    
+    h2 { color: #4a4a4a; margin-bottom: 10px; font-size: 1.25rem; line-height: 1.5; font-weight: 600; }
+    p.subtext { color: #777; font-size: 0.95rem; margin-bottom: 20px; line-height: 1.5; }
+
+    .btn-group { display: flex; flex-direction: column; gap: 12px; justify-content: center; align-items: center; position: relative; min-height: 110px; }
+    
+    .btn { padding: 12px 24px; border-radius: 20px; font-size: 0.95rem; font-weight: bold; border: none; cursor: pointer; transition: all 0.2s ease; width: 100%; max-width: 280px; }
+    .btn-yes { background-color: #ff6b81; color: white; box-shadow: 0 4px 15px rgba(255, 107, 129, 0.35); }
+    .btn-yes:hover { background-color: #ff4757; transform: translateY(-2px); }
+    
+    .btn-no { background-color: #f1f2f6; color: #747d8c; position: relative; z-index: 5; }
+
+    /* หน้าสรุปผล */
+    .result-card { display: none; animation: fadeIn 0.5s ease; }
+    .result-title { color: #2f3542; font-size: 1.25rem; font-weight: bold; margin-bottom: 12px; }
+    .result-desc { color: #57606f; font-size: 0.92rem; line-height: 1.6; margin-bottom: 20px; }
+    .btn-thanks { background-color: #70a1ff; color: white; box-shadow: 0 4px 15px rgba(112, 161, 255, 0.35); }
+
+    @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+  </style>
+</head>
+<body>
+
+  <!-- หน้าขอโอกาส -->
+  <div class="container" id="mainStep">
+    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3ZydnAzeXp3b3FiYmhxeGF2bmI1OW9rbndycWFxOHRzZXRhbXltbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/L95234bYOHKS4/giphy.gif" alt="Please" class="gif-img">
+    <h2>เรามาเริ่มต้นใหม่กันได้มั้ย<br>เค้าจะทำให้ดีกว่าเดิม</h2>
+    <p class="subtext">ขอโอกาสแก้ตัวอีกสักครั้งนะ...</p>
+
+    <div class="btn-group">
+      <button class="btn btn-yes" onclick="acceptLove()">ได้</button>
+      <button class="btn btn-no" id="noBtn" onmouseover="handleNoButton()" onclick="handleNoButton()" ontouchstart="handleNoButton()">ไม่เอาอ่ะ</button>
+    </div>
+  </div>
+
+  <!-- หน้าสรุปเมื่อกด "ตกลง" -->
+  <div class="container result-card" id="yesStep">
+    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZXBza2xpaHFmd3VwMnY3Nnhsd3BhMDFsbmZud3NwdXlzcGg4andhbiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/gDfteqLchLcGQ/giphy.gif" alt="Happy Hug" class="gif-img">
+    <div class="result-title">ขอบคุณนะสำหรับโอกาส 🙏💖</div>
+    <div class="result-desc">
+      เค้าสัญญาว่าจะดูแลความสัมพันธ์ครั้งนี้ให้ดีกว่าเดิม จะใส่ใจและตั้งใจให้มากขึ้นจริงๆ นะครับ ❤️
+    </div>
+  </div>
+
+  <!-- หน้าสรุปเมื่อกด "ไม่เป็นไร เราเคารพสิ่งที่เธอเลือกนะ" -->
+  <div class="container result-card" id="respectStep">
+    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZGs3ZmdmNDJpMXFzaXVyZHJ6dXlzNnVndW43aWs5OHM3Y2MzeHNwZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o85xK131y3DAtvhL2/giphy.gif" alt="Respect" class="gif-img">
+    <div class="result-title">เข้าใจแล้วครับ 🤍</div>
+    <div class="result-desc">
+      ไม่เป็นไรเลยนะ เคารพการตัดสินใจของเธอเสมอ ขอบคุณสำหรับทุกช่วงเวลาดีๆ ที่ผ่านมา ขอให้เธอเจอแต่ความสุขนะครับ
+    </div>
+    <button class="btn btn-thanks" onclick="alert('ขอบคุณเธอมากๆ เช่นกันนะ 😊✨')">ขอบคุณนะ</button>
+  </div>
+
+  <script>
+    let noCount = 0;
+    const noBtn = document.getElementById('noBtn');
+
+    function handleNoButton() {
+      noCount++;
+
+      if (noCount <= 5) {
+        // วิ่งหนี 5 รอบแรก
+        const x = Math.random() * (window.innerWidth - 200) - (window.innerWidth / 2 - 100);
+        const y = Math.random() * (window.innerHeight - 200) - (window.innerHeight / 2 - 100);
+        
+        noBtn.style.position = 'fixed';
+        noBtn.style.left = '50%';
+        noBtn.style.top = '50%';
+        noBtn.style.transform = `translate(${x}px, ${y}px)`;
+      } else if (noCount === 6) {
+        // รอบที่ 6 ปุ่มหยุดวิ่ง และเปลี่ยนเป็นข้อความเคารพการตัดสินใจ
+        noBtn.style.position = 'relative';
+        noBtn.style.left = '0';
+        noBtn.style.top = '0';
+        noBtn.style.transform = 'none';
+        noBtn.style.backgroundColor = '#eccc68';
+        noBtn.style.color = '#fff';
+        noBtn.innerText = 'ไม่เป็นไร เราเคารพสิ่งที่เธอเลือกนะ';
+      } else {
+        // รอบที่ 7 ขึ้นไป (เมื่อกดปุ่มที่เปลี่ยนข้อความแล้ว)
+        document.getElementById('mainStep').style.display = 'none';
+        document.getElementById('respectStep').style.display = 'block';
+      }
+    }
+
+    function acceptLove() {
+      document.getElementById('mainStep').style.display = 'none';
+      document.getElementById('yesStep').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
