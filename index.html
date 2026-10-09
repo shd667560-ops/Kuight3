@@ -11,7 +11,7 @@
     
     .gif-img { width: 160px; height: 160px; object-fit: cover; border-radius: 20px; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
     
-    h2 { color: #4a4a4a; margin-bottom: 10px; font-size: 1.25rem; line-height: 1.5; font-weight: 600; }
+    h2 { color: #4a4a4a; margin-bottom: 10px; font-size: 1.25rem; line-height: 1.5; font-weight: 600; min-height: 60px; display: flex; align-items: center; justify-content: center; }
     p.subtext { color: #777; font-size: 0.95rem; margin-bottom: 20px; line-height: 1.5; }
 
     .btn-group { display: flex; flex-direction: column; gap: 12px; justify-content: center; align-items: center; position: relative; min-height: 120px; }
@@ -36,8 +36,8 @@
   <!-- หน้าขอโอกาส -->
   <div class="container" id="mainStep">
     <img src="https://media1.tenor.com/m/X9R1m0l80_gAAAAC/mochi-mochi-peach-cat-sad.gif" alt="Sad Cat" class="gif-img">
-    <h2>เรามาเริ่มต้นใหม่กันได้มั้ย<br>เค้าจะทำให้ดีกว่าเดิม</h2>
-    <p class="subtext">ขอโอกาสแก้ตัวอีกสักครั้งนะ...</p>
+    <h2 id="mainHeading">เรามาเริ่มต้นใหม่กันได้มั้ย<br>เค้าจะทำให้ดีกว่าเดิม</h2>
+    <p class="subtext" id="subHeading">ขอโอกาสแก้ตัวอีกสักครั้งนะ...</p>
 
     <div class="btn-group">
       <button class="btn btn-yes" onclick="acceptLove()">ได้</button>
@@ -67,23 +67,28 @@
   <script>
     let noCount = 0;
     const noBtn = document.getElementById('noBtn');
+    const mainHeading = document.getElementById('mainHeading');
+    const subHeading = document.getElementById('subHeading');
 
     function handleNoButton() {
       noCount++;
 
       if (noCount === 1) {
-        noBtn.innerText = 'กลับมาดีกันนะจะไม่ทำแบบนั้นแล้ว';
+        mainHeading.innerText = 'กลับมาดีกันนะจะไม่ทำแบบนั้นแล้ว';
+        subHeading.innerText = 'เค้าสัญญาจริงๆ นะ...';
         moveButton();
       } else if (noCount === 2) {
-        noBtn.innerText = 'เค้าขอโทษนะตอนนั้นเค้ายังเด็กอยู่อ่ะคับ';
+        mainHeading.innerText = 'เค้าขอโทษนะตอนนั้นเค้ายังเด็กอยู่อ่ะคับ';
+        subHeading.innerText = 'ตอนนี้เค้าโตขึ้นและรู้ตัวแล้วนะ...';
         moveButton();
       } else if (noCount === 3) {
-        noBtn.innerText = 'เค้าขอโทษนะทุกเรื่องที่ผ่านมาเรามาเริ่มใหม่กันนะ';
+        mainHeading.innerText = 'เค้าขอโทษนะทุกเรื่องที่ผ่านมาเรามาเริ่มใหม่กันนะ';
+        subHeading.innerText = 'ลบเรื่องไม่ดีแล้วเริ่มใหม่ด้วยกันนะ...';
         moveButton();
       } else if (noCount === 4 || noCount === 5) {
         moveButton();
       } else if (noCount === 6) {
-        // รอบที่ 6 หยุดวิ่ง และเปลี่ยนเป็นข้อความเคารพการตัดสินใจ
+        // รอบที่ 6 ปุ่มหยุดวิ่ง และเปลี่ยนเป็นข้อความเคารพการตัดสินใจ
         noBtn.style.position = 'relative';
         noBtn.style.left = '0';
         noBtn.style.top = '0';
@@ -92,14 +97,14 @@
         noBtn.style.color = '#fff';
         noBtn.innerText = 'ไม่เป็นไร เค้าเคารพการเลือกของอ้วนนะ';
       } else {
-        // รอบที่ 7 (เมื่อกดปุ่มข้อความรอบที่ 6)
+        // รอบที่ 7 (เมื่อกดปุ่มที่เปลี่ยนข้อความในรอบที่ 6)
         document.getElementById('mainStep').style.display = 'none';
         document.getElementById('respectStep').style.display = 'block';
       }
     }
 
     function moveButton() {
-      const x = Math.random() * (window.innerWidth - 220) - (window.innerWidth / 2 - 110);
+      const x = Math.random() * (window.innerWidth - 200) - (window.innerWidth / 2 - 100);
       const y = Math.random() * (window.innerHeight - 200) - (window.innerHeight / 2 - 100);
       
       noBtn.style.position = 'fixed';
